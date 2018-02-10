@@ -1,13 +1,13 @@
 'use strict';
 
 import {
-    BrickBreaker
-} from './js/BrickBreaker';
+    RainbowBreaker
+} from './js/RainbowBreaker';
 
 document.addEventListener('DOMContentLoaded', function () {
     const launch = document.querySelector('#start-button');
     const reload = document.querySelector('#reload-button');
-    const rainbowBB = new BrickBreaker('#rainbow-canvas');
+    const rainbowBB = new RainbowBreaker('#rainbow-canvas');
 
     rainbowBB.gameInit();
 
