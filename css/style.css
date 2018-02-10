@@ -1,0 +1,27 @@
+body {
+    background-color: honeydew;
+}
+
+.container {
+    width: 1000px;
+    height: 700px;
+}
+
+canvas {
+    box-shadow: 12px 14px 0 black;
+    border: solid 1px;
+    background-color: darkslategray;
+    /* align-content: center; */
+}
+
+button {
+    box-shadow: 5px 5px 0 black;
+    font-family: Arial monospace;
+    font-size: 1.5em;
+}
+
+h1 {
+    box-shadow: 5px 5px 0 black;
+    /* text-align: center; */
+    /* display: inline-block; */
+}
