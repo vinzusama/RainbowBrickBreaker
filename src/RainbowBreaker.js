@@ -3,7 +3,7 @@ import { Brick } from './Brick';
 export class BrickBreaker {
     constructor(selector) {
         this.canvas = document.querySelector(selector);  // Récupère le canvas HTML passé en arg
-        this.ctx = this.canvas.getContext('2d');      // Crée un contexte 2d dans le canvas
+        this.ctx    = this.canvas.getContext('2d');      // Crée un contexte 2d dans le canvas
         this.bricks = new Array();
     }
 
@@ -14,9 +14,9 @@ export class BrickBreaker {
 
     gridInit() {
         for (let posX = 10; posX < 900; posX += (85 + 10)) {
-            var red = Math.trunc(Math.random() * (255 - 0) + 0);
+            var red   = Math.trunc(Math.random() * (255 - 0) + 0);
             var green = Math.trunc(Math.random() * (255 - 0) + 0);
-            var blue = Math.trunc(Math.random() * (255 - 0) + 0);
+            var blue  = Math.trunc(Math.random() * (255 - 0) + 0);
 
 
             let brickColor = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
@@ -42,6 +42,12 @@ export class BrickBreaker {
     }
 
     racketInit() {
+        this.ctx.fillStyle = 'rgb(255, 255, 255)';
+        this.ctx.fillRect(500, 615, 120, 15);
+
+        // document.addEventListener('mousemove', function(e) {
+        //     e.
+        // })
 
     }
 }
