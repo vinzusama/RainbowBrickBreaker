@@ -2,7 +2,7 @@
 
 import {
     RainbowBreaker
-} from './js/RainbowBreaker';
+} from './src/RainbowBreaker';
 
 document.addEventListener('DOMContentLoaded', function () {
     const launch = document.querySelector('#start-button');
