@@ -6,8 +6,8 @@ import {
 
 document.addEventListener('DOMContentLoaded', function () {
   const launch = document.querySelector('#start-button')
-  const reload = document.querySelector('#rainbow-button')
-  const rainbowBB = new BrickBreaker('#rainbowBB')
+  const reload = document.querySelector('#reload-button')
+  const rainbowBB = new BrickBreaker('#rainbow-canvas')
 
   rainbowBB.gameInit()
 
