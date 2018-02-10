@@ -1,0 +1,22 @@
+'use strict'
+
+import {
+  BrickBreaker
+} from './js/BrickBreaker'
+
+document.addEventListener('DOMContentLoaded', function () {
+  const launch = document.querySelector('#start-button')
+  const reload = document.querySelector('#rainbow-button')
+  const rainbowBB = new BrickBreaker('#rainbowBB')
+
+  rainbowBB.gameInit()
+
+  launch.addEventListener('click', function () {
+    rainbowBB.start()
+  })
+
+  reload.addEventListener('click', function () {
+    rainbowBB.gridInit()
+    // reload.setAttribute('disabled', null);
+  })
+})
