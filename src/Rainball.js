@@ -8,9 +8,9 @@ export class Rainball {
         this.color  = color;
     }
 
-    drawBall(ctx) {
+    draw(ctx, posX, posY) {
         ctx.beginPath();
-        ctx.arc(this.posX, this.posY, this.radius, 0, Math.PI * 2);
+        ctx.arc(posX, posY, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = '#0095DD';
         ctx.fill();
         ctx.closePath();

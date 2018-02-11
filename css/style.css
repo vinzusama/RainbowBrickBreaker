@@ -14,6 +14,10 @@ canvas {
     /* align-content: center; */
 }
 
+.grey {
+    filter: grayscale(80%);
+}
+
 button {
     box-shadow : 5px 5px 0 black;
     font-family: Arial monospace;
