@@ -1,13 +1,15 @@
 export class Grid {
-    constructor(dimX, dimY) {
-        this.exists  = true;
+    constructor(canvas, dimX, dimY) {
+        this.canvas  = canvas;
+        this.ctx     = canvas.getContext('2d');
         this.width   = dimX;
         this.height  = dimY;
-        this.padding = 20;
+        this.exists  = true;
+        this.padding = 30;
         this.bricks  = [];
     }
 
-    init(ctx, canvas) {
+    init() {
 
         for (let c = 0; c < this.width; c++) {
             this.bricks[c] = [];
@@ -17,7 +19,7 @@ export class Grid {
         }
 
         if (this.bricks) {
-            let ratio        = (canvas.width - this.padding * 2) / this.width;
+            let ratio        = (this.canvas.width - (this.padding * 2) + 10) / this.width;
             let brickPadding = ratio / 10;
             let brickSize    = (ratio / 10) * 9;           
 
@@ -32,33 +34,23 @@ export class Grid {
                     var brickX = (col * (brickSize + brickPadding)) + this.padding;
                     var brickY = (row * (25 + brickPadding)) + this.padding;
                     
-                    this.bricks[col][row].x = brickX;
-                    this.bricks[col][row].y = brickY;
+                    this.bricks[col][row].x     = brickX;
+                    this.bricks[col][row].y     = brickY;
                     this.bricks[col][row].color = brickColor;
 
-                    ctx.beginPath();
-                    ctx.fillStyle = brickColor;
-                    ctx.fillRect(brickX, brickY, brickSize, 25);
-                    // ctx.fill();
-                    ctx.closePath();
+                    this.ctx.beginPath();
+                    this.ctx.fillStyle = brickColor;
+                    this.ctx.fillRect(brickX, brickY, brickSize, 25);
+                    this.ctx.closePath();
                 }
             }
         }
     }
     
-    draw(ctx, canvas) {
-        this.init(ctx, canvas);
+    draw() {
+        this.init();
 
-        // console.log(this.bricks);
+        console.log(this.bricks);
         
-
-        // this.bricks.forEach((col) => {
-        //     console.log(col, this.width, this.height);
-                
-        //     ctx.beginPath();
-        //     ctx.fillStyle = '#EEE';
-        //     ctx.fillRect(col.x, col.y, this.width, this.height);
-        //     ctx.closePath();
-        // });
     }
 }

@@ -23,6 +23,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     grayscale.addEventListener('click', function () {
         let canvas = document.querySelector('#rainbow-canvas'); 
-        canvas.setAttribute('class', 'grey');
+        
+        if (canvas.getAttribute('class') === 'grey') {
+            canvas.setAttribute('class', '');
+        } else {
+            canvas.setAttribute('class', 'grey');
+        }
     });
 });

@@ -3,6 +3,7 @@
 export class Racket {
     constructor(canvas, color) {
         this.canvas = canvas;
+        this.ctx    = this.canvas.getContext('2d');
         this.color  = color;
         this.width  = 120;
         this.height = 12;
@@ -10,11 +11,29 @@ export class Racket {
         this.posY   = Math.trunc(this.canvas.height - (this.canvas.height / 20));           
     }
 
-    draw(ctx) {
+    init() {
+        this.draw();
+    }
 
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.posX, this.posY, this.width, this.height);
-        ctx.closePath();
+    draw() {
+        this.ctx.beginPath();
+        this.ctx.fillStyle = this.color;
+        this.ctx.fillRect(this.posX, this.posY, this.width, this.height);
+        this.ctx.closePath();
+    }
+
+    animate(direction) {
+
+        // this.posX += 7;
+        
+        if (direction === 'right' && this.posX < this.canvas.width - this.width) {
+            this.posX += 27;
+        } else if (direction === 'left' && this.posX > 0) {
+            this.posX -= 27;
+        }
+        
+        this.draw();
+
+        
     }
 }
