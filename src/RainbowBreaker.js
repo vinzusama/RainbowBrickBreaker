@@ -15,7 +15,7 @@ export class RainbowBreaker {
     gameInit() {
         this.racket.init();
         this.ball.init((this.racket.posX + this.racket.width / 2), (this.racket.posY - this.ball.radius));
-        this.grid.draw(this.canvas);
+        this.grid.init(this.canvas);
     }
 
     start() {
@@ -31,6 +31,7 @@ export class RainbowBreaker {
         var clock = setInterval(() => {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.racket.animate();
+            this.grid.draw();
             let bouncing = this.ball.animate(this.racket);
             
             if (bouncing !== 1) {

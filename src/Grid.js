@@ -11,12 +11,12 @@ export class Grid {
 
     init() {
 
-        for (let c = 0; c < this.width; c++) {
-            this.bricks[c] = [];
-            for (let r = 0; r < this.height; r++) {
-                this.bricks[c][r] = { x: 0, y: 0, color: 'rgb(0, 0, 0)' };
-            }
-        }
+        // for (let c = 0; c < this.width; c++) {
+        //     this.bricks[c] = [];
+        //     for (let r = 0; r < this.height; r++) {
+        //         this.bricks[c][r] = { x: 0, y: 0, color: 'rgb(0, 0, 0)' };
+        //     }
+        // }
 
         if (this.bricks) {
             let ratio        = (this.canvas.width - (this.padding * 2) + 10) / this.width;
@@ -34,10 +34,13 @@ export class Grid {
                     var brickX = (col * (brickSize + brickPadding)) + this.padding;
                     var brickY = (row * (25 + brickPadding)) + this.padding;
                     
-                    this.bricks[col][row].x     = brickX;
-                    this.bricks[col][row].y     = brickY;
-                    this.bricks[col][row].color = brickColor;
+                    this.bricks.push({ x: brickX, y: brickY, color: brickColor, size: brickSize });
 
+                    // this.bricks[].x     = brickX;
+                    // this.bricks[].y     = brickY;
+                    // this.bricks[].color = brickColor;
+                    
+                    // Draw the Grid once, until play start
                     this.ctx.beginPath();
                     this.ctx.fillStyle = brickColor;
                     this.ctx.fillRect(brickX, brickY, brickSize, 25);
@@ -48,9 +51,17 @@ export class Grid {
     }
     
     draw() {
-        this.init();
+        for (const brick in this.bricks) {
+            if (this.bricks.hasOwnProperty(brick)) {
+                const element = this.bricks[brick];
 
-        console.log(this.bricks);
+                this.ctx.beginPath();
+                this.ctx.fillStyle = element.color;
+                this.ctx.fillRect(element.x, element.y, element.size, 25);
+                this.ctx.closePath();
+                
+            }
+        }
         
     }
 }
