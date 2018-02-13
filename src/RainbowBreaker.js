@@ -32,7 +32,9 @@ export class RainbowBreaker {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.racket.animate();
             this.grid.draw();
-            let bouncing = this.ball.animate(this.racket);
+            // let bouncing = this.ball.animate(this.racket);
+            this.ball.draw();
+            let bouncing = this.bounce();
             
             if (bouncing !== 1) {
                 clearInterval(clock);
@@ -40,6 +42,12 @@ export class RainbowBreaker {
                 document.location.reload();                
             }
 
+
+            // check if ball.X}} > {{canvas width
+            // else ball.bounce(x);
+            // let Ball do the rest
+            // then check racket
+            // then check bricks
 
 
             // document.addEventListener('keyup', (e) => {
@@ -51,5 +59,28 @@ export class RainbowBreaker {
             // });
             
         }, 10);
+    }
+
+    bounce() {
+        if (this.ball.posX + this.ball.dx > (this.canvas.width - this.ball.radius) || this.ball.posX + this.ball.dx < this.ball.radius) {
+            this.ball.dx = -this.ball.dx;
+        }
+
+        if (this.ball.posY + this.ball.dy < this.ball.radius) {
+            this.ball.dy = -this.ball.dy;
+        } else if ((this.ball.posY + this.ball.radius) > this.racket.posY) {
+            if ((this.ball.posX > this.racket.posX) && (this.ball.posX < (this.racket.posX + this.racket.width))) {
+                this.ball.dy = -this.ball.dy;
+            }
+            if (this.ball.posY > (this.canvas.height + this.ball.radius)) {
+
+                return 0;
+            }
+        }
+
+        this.ball.posX += this.ball.dx;
+        this.ball.posY += this.ball.dy;
+
+        return 1;
     }
 }
