@@ -4,8 +4,8 @@ import { Racket }   from './Racket';
 
 export class RainbowBreaker {
     constructor(selector) {
-        this.canvas = document.querySelector(selector);     // Récupère le canvas HTML passé en arg
-        this.ctx    = this.canvas.getContext('2d');      // Crée un contexte 2d dans le canvas
+        this.canvas = document.querySelector(selector);                    // Récupère le canvas HTML passé en arg
+        this.ctx    = this.canvas.getContext('2d');                        // Crée un contexte 2d dans le canvas
         this.bricks = new Array();
         this.grid   = new Grid(this.canvas, 10, 6);
         this.racket = new Racket(this.canvas, '#FFFFFF');
@@ -17,17 +17,21 @@ export class RainbowBreaker {
         this.ball.init((this.racket.posX + this.racket.width / 2), (this.racket.posY - this.ball.radius));
         this.grid.init(this.canvas);
     }
-
+    
     start() {
+
         document.addEventListener('keydown', (e) => {
-            if (e.keyCode == 39) {
-                this.racket.animate('right');
-            }
-            else if (e.keyCode == 37) {
-                this.racket.animate('left');
-            }
+            this.racket.keyDownHandler(e);
         });
-        
+        document.addEventListener('keyup', (e) => {
+            this.racket.keyUpHandler(e);
+        });
+
+        // this.ball.animate();
+
+        // let ball = this.ball;
+        // window.requestAnimationFrame(ball.draw);
+
         var clock = setInterval(() => {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.racket.animate();
@@ -35,11 +39,11 @@ export class RainbowBreaker {
             // let bouncing = this.ball.animate(this.racket);
             this.ball.draw();
             let bouncing = this.bounce();
-            
-            if (bouncing !== 1) {
+
+            if (bouncing != 1) {
                 clearInterval(clock);
                 alert('Game lost.');
-                document.location.reload();                
+                document.location.reload();
             }
 
 
@@ -49,18 +53,9 @@ export class RainbowBreaker {
             // then check racket
             // then check bricks
 
-
-            // document.addEventListener('keyup', (e) => {
-            //     if (e.keyCode == 39) {
-            //         this.racket.animate();
-            //     } else if (e.keyCode == 37) {
-            //         this.racket.animate();
-            //     }
-            // });
-            
         }, 10);
     }
-
+    
     bounce() {
         if (this.ball.posX + this.ball.dx > (this.canvas.width - this.ball.radius) || this.ball.posX + this.ball.dx < this.ball.radius) {
             this.ball.dx = -this.ball.dx;

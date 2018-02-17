@@ -1,8 +1,6 @@
 'use strict';
 
-import {
-    RainbowBreaker
-} from './src/RainbowBreaker';
+import { RainbowBreaker } from './src/RainbowBreaker';
 
 document.addEventListener('DOMContentLoaded', function () {
     const launch    = document.querySelector('#start-button');
@@ -22,12 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     grayscale.addEventListener('click', function () {
-        let canvas = document.querySelector('#rainbow-canvas'); 
-        
-        if (canvas.getAttribute('class') === 'grey') {
-            canvas.setAttribute('class', '');
-        } else {
-            canvas.setAttribute('class', 'grey');
-        }
+        let canvas = document.querySelector('#rainbow-canvas');
+        let greyed = canvas.getAttribute('class');
+
+        canvas.setAttribute('class', greyed ? '' : 'grey');
     });
 });

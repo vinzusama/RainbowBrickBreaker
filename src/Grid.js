@@ -1,12 +1,12 @@
 export class Grid {
     constructor(canvas, dimX, dimY) {
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
-        this.width = dimX;
-        this.height = dimY;
-        this.exists = true;
+        this.canvas  = canvas;
+        this.ctx     = canvas.getContext('2d');
+        this.width   = dimX;
+        this.height  = dimY;
+        this.exists  = true;
         this.padding = 30;
-        this.bricks = [];
+        this.bricks  = [];
     }
 
     init() {
@@ -15,9 +15,9 @@ export class Grid {
         let brickSize = (ratio / 10) * 9;
 
         for (let col = 0; col < this.width; col++) {
-            var red = Math.trunc(Math.random() * (255 - 0) + 0);
+            var red   = Math.trunc(Math.random() * (255 - 0) + 0);
             var green = Math.trunc(Math.random() * (255 - 0) + 0);
-            var blue = Math.trunc(Math.random() * (255 - 0) + 0);
+            var blue  = Math.trunc(Math.random() * (255 - 0) + 0);
 
             let brickColor = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
 
@@ -32,14 +32,10 @@ export class Grid {
                     size: brickSize,
                     status: 1,
                 });
-
-                // Draw the Grid once, until game really starts
-                this.ctx.beginPath();
-                this.ctx.fillStyle = brickColor;
-                this.ctx.fillRect(brickX, brickY, brickSize, 25);
-                this.ctx.closePath();
             }
         }
+
+        this.draw();
 
     }
 

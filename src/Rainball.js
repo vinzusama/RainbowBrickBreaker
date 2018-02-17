@@ -1,5 +1,3 @@
-'use strict';
-
 export class Rainball {
     constructor(canvas, startX, startY, size, color) {
         this.canvas = canvas;
