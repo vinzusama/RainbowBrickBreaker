@@ -26,6 +26,9 @@ export class RainbowBreaker {
         document.addEventListener('keyup', (e) => {
             this.racket.keyUpHandler(e);
         });
+        document.addEventListener('mousemove', (e) => {
+            this.racket.mouseMoveHandler(e);
+        });
 
         // this.ball.animate();
 
@@ -45,7 +48,6 @@ export class RainbowBreaker {
                 alert('Game lost.');
                 document.location.reload();
             }
-
 
             // check if ball.X}} > {{canvas width
             // else ball.bounce(x);

@@ -47,4 +47,11 @@ export class Racket {
             this.leftPressed = false;
         }
     }
+
+    mouseMoveHandler(e) {
+        var relativeX = e.clientX - this.canvas.offsetLeft;
+        if (relativeX > 0 && relativeX < this.canvas.width) {
+            this.posX = relativeX - this.width / 2;
+        }
+    }
 }
