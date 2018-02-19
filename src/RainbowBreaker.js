@@ -7,77 +7,77 @@ export class RainbowBreaker {
         this.canvas = document.querySelector(selector);                    // Récupère le canvas HTML passé en arg
         this.ctx    = this.canvas.getContext('2d');                        // Crée un contexte 2d dans le canvas
         this.bricks = new Array();
-        this.grid   = new Grid(this.canvas, 10, 6);
-        this.racket = new Racket(this.canvas, '#FFFFFF');
-        this.ball   = new Rainball(this.canvas, (this.canvas.width / 2), (this.canvas.height - 30), 12, '#0095DD');
+        this.grid   = new Grid(10, 6);
+        this.racket = new Racket('#FFFFFF');
+        this.ball   = new Rainball(12, '#0095DD');
     }
 
     gameInit() {
-        this.racket.init();
-        this.ball.init((this.racket.posX + this.racket.width / 2), (this.racket.posY - this.ball.radius));
-        this.grid.init(this.canvas);
+        this.grid.init(this.ctx);
+        this.racket.init(
+            this.canvas.width / 2, 
+            Math.trunc( this.canvas.height - ( this.canvas.height / 20 ) ), 
+            this.ctx
+        );
+        
+        this.ball.init(
+            this.racket.X, 
+            this.racket.posY - this.ball.radius, 
+            this.ctx
+        );
     }
     
     start() {
-
         document.addEventListener('keydown', (e) => {
             this.racket.keyDownHandler(e);
         });
+
         document.addEventListener('keyup', (e) => {
             this.racket.keyUpHandler(e);
         });
+
         document.addEventListener('mousemove', (e) => {
-            this.racket.mouseMoveHandler(e);
+            this.racket.mouseMoveHandler(e, this.canvas);
         });
 
-        // this.ball.animate();
-
-        // let ball = this.ball;
-        // window.requestAnimationFrame(ball.draw);
-
-        var clock = setInterval(() => {
+        setInterval(() => {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.racket.animate();
-            this.grid.draw();
-            // let bouncing = this.ball.animate(this.racket);
-            this.ball.draw();
-            let bouncing = this.bounce();
+            this.racket.animate(this.ctx);
+            this.grid.draw(this.ctx);
+            this.ball.animate(this.ctx);
 
-            if (bouncing != 1) {
-                clearInterval(clock);
-                alert('Game lost.');
-                document.location.reload();
-            }
-
-            // check if ball.X}} > {{canvas width
-            // else ball.bounce(x);
-            // let Ball do the rest
-            // then check racket
-            // then check bricks
-
+            this.bounce(this.grid.bricks, this.racket, this.ball);
         }, 10);
     }
-    
-    bounce() {
-        if (this.ball.posX + this.ball.dx > (this.canvas.width - this.ball.radius) || this.ball.posX + this.ball.dx < this.ball.radius) {
-            this.ball.dx = -this.ball.dx;
-        }
 
-        if (this.ball.posY + this.ball.dy < this.ball.radius) {
-            this.ball.dy = -this.ball.dy;
-        } else if ((this.ball.posY + this.ball.radius) > this.racket.posY) {
-            if ((this.ball.posX > this.racket.posX) && (this.ball.posX < (this.racket.posX + this.racket.width))) {
-                this.ball.dy = -this.ball.dy;
+    bounce(bricks, racket, ball) {
+        if (ball.X > this.ctx.canvas.width || ball.posX < ball.radius) {
+            ball.bounceX();
+        } else if (ball.posY < ball.radius) {
+            ball.bounceY();
+        } else if (ball.Y > racket.posY) {
+            if ((ball.X > racket.posX) && (ball.X < racket.posX + racket.width)) {
+                ball.bounceY();
             }
-            if (this.ball.posY > (this.canvas.height + this.ball.radius)) {
-
-                return 0;
+            if (ball.posY > (this.ctx.canvas.height + ball.radius)) {
+                alert('Game lost.');
+                window.location.reload();
             }
         }
 
-        this.ball.posX += this.ball.dx;
-        this.ball.posY += this.ball.dy;
+        // console.log(bricks);
+        
 
-        return 1;
+        // bricks.forEach(brick => {
+        //     // console.log(element.x, element.y);
+        //     if (brick.status === 1) {
+        //         if ((this.posX + this.radius) > brick.x && (this.posX + this.radius) < (brick.x + brick.size) &&
+        //             (this.posY + this.radius) > brick.y && (this.posX + this.radius) < (brick.y + brick.height)) {
+
+        //             this.dy += -this.dy;
+        //         }
+        //     }
+
+        // });  
     }
 }

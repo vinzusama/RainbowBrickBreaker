@@ -1,49 +1,44 @@
 export class Rainball {
-    constructor(canvas, startX, startY, size, color) {
-        this.canvas = canvas;
-        this.ctx    = canvas.getContext('2d');
+    constructor(size, color) {
         this.radius = size;
-        this.posX   = startX;
-        this.posY   = startY;
         this.color  = color;
-        this.dx     = 3.5;
-        this.dy     = -3.5;
+        this.dx     = 3;
+        this.dy     = -3;
     }
 
-    init(posX, posY) {
+    get X() {
+        return this.posX + this.radius;
+    }
+
+    get Y() {
+        return this.posY + this.radius;
+    }
+
+    init(posX, posY, ctx) {
         this.posX = posX;
         this.posY = posY;
-        this.draw();
+        this.draw(ctx);
     }
 
-    draw() {
-        this.ctx.beginPath();
-        this.ctx.arc(this.posX, this.posY, this.radius, 0, Math.PI * 2);
-        this.ctx.fillStyle = '#0095DD';
-        this.ctx.fill();
-        this.ctx.closePath();
+    draw(ctx) {
+        ctx.beginPath();
+        ctx.arc(this.posX, this.posY, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#0095DD';
+        ctx.fill();
+        ctx.closePath();
     }
 
-    bounce() {
-        if (this.posX + this.dx > (this.canvas.width - this.radius) || this.posX + this.dx < this.radius) {
-            this.dx = -this.dx;
-        }
-
-        if (this.posY + this.dy < this.radius) {
-            this.dy = -this.dy;
-        } else if ((this.posY + this.radius) > this.racket.posY) {
-            if ((this.posX > this.racket.posX) && (this.posX < (this.racket.posX + this.racket.width))) {
-                this.dy = -this.dy;
-            }
-            if (this.posY > (this.canvas.height + this.radius)) {
-
-                return 0;
-            }
-        }
-
+    animate(ctx) {
         this.posX += this.dx;
         this.posY += this.dy;
+        this.draw(ctx);
+    }
 
-        return 1;
+    bounceX() {
+        this.dx = -this.dx;
+    }
+
+    bounceY() {
+        this.dy = -this.dy;
     }
 }

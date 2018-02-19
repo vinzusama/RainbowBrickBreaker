@@ -1,35 +1,47 @@
 export class Racket {
-    constructor(canvas, color) {
-        this.canvas = canvas;
-        this.ctx = this.canvas.getContext('2d');
+    constructor(color) {
         this.color = color;
         this.width = 120;
         this.height = 12;
-        this.posX = this.canvas.width / 2 - (this.width / 2);
-        this.posY = Math.trunc(this.canvas.height - (this.canvas.height / 20));
         this.leftPressed = false;
         this.rightPressed = false;
     }
 
-    init() {
-        this.draw();
+    get X() {
+        return this.posX + (this.width / 2);
     }
 
-    draw() {
-        this.ctx.beginPath();
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.posX, this.posY, this.width, this.height);
-        this.ctx.closePath();
+    get Y() {
+        return this.posY + (this.height / 2);
     }
 
-    animate() {
-        if (this.rightPressed === true && this.posX < this.canvas.width - this.width) {
+    /**
+     * 
+     * @param {*} x : The initial X coordonate
+     * @param {*} y : The initial Y coordonate
+     * @param {*} ctx : The canvas to be passed to draw()
+     */
+    init(x, y, ctx) {
+        this.posX = x;
+        this.posY = y;
+        this.draw(ctx);
+    }
+
+    draw(ctx) {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.posX, this.posY, this.width, this.height);
+        ctx.closePath();
+    }
+
+    animate(ctx) {
+        if (this.rightPressed === true && this.posX < ctx.canvas.width - this.width) {
             this.posX += 12;
         } else if (this.leftPressed === true && this.posX > 0) {
             this.posX -= 12;
         }
 
-        this.draw();
+        this.draw(ctx);
     }
 
     keyDownHandler(e) {
@@ -48,9 +60,9 @@ export class Racket {
         }
     }
 
-    mouseMoveHandler(e) {
-        var relativeX = e.clientX - this.canvas.offsetLeft;
-        if (relativeX > 0 && relativeX < this.canvas.width) {
+    mouseMoveHandler(e, canvas) {
+        var relativeX = e.clientX - canvas.offsetLeft;
+        if (relativeX > 0 && relativeX < canvas.width) {
             this.posX = relativeX - this.width / 2;
         }
     }
