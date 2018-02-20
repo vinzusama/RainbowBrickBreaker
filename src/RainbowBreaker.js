@@ -16,7 +16,7 @@ export class RainbowBreaker {
         this.grid.init(this.ctx);
         this.racket.init(
             this.canvas.width / 2, 
-            Math.trunc( this.canvas.height - ( this.canvas.height / 20 ) ), 
+            Math.trunc(this.canvas.height - (this.canvas.height / 20)), 
             this.ctx
         );
         
@@ -55,7 +55,9 @@ export class RainbowBreaker {
             ball.bounceX();
         } else if (ball.posY < ball.radius) {
             ball.bounceY();
-        } else if (ball.Y > racket.posY) {
+        // } else if () {
+
+        }else if (ball.Y > racket.posY) {
             if ((ball.X > racket.posX) && (ball.X < racket.posX + racket.width)) {
                 ball.bounceY();
             }
@@ -65,7 +67,7 @@ export class RainbowBreaker {
             }
         }
 
-        // console.log(bricks);
+        
         
 
         // bricks.forEach(brick => {

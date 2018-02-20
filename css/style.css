@@ -3,29 +3,35 @@ body {
 }
 
 .container {
-    width : 1000px;
-    height: 700px;
+    margin        : auto;
+    width         : 1000px;
+    height        : 700px;
+    display       : flex;
+    flex-direction: column;
+}
+
+h1 {
+    box-shadow: 5px 5px 0 black;
+    text-align: center;
 }
 
 canvas {
     box-shadow      : 12px 14px 0 black;
     border          : solid 1px;
     background-color: darkslategray;
-    /* align-content: center; */
 }
 
 .grey {
     filter: grayscale(80%);
 }
 
+.control-buttons {
+    padding-top: 20px;
+    margin     : auto;
+}
+
 button {
     box-shadow : 5px 5px 0 black;
     font-family: Arial monospace;
     font-size  : 1.5em;
-}
-
-h1 {
-    box-shadow: 5px 5px 0 black;
-    /* text-align: center; */
-    /* display: inline-block; */
 }

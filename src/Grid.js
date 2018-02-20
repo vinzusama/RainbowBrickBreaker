@@ -10,21 +10,21 @@ export class Grid {
     init(ctx) {
         let ratio = (ctx.canvas.width - (this.padding * 2) + 10) / this.width;
         let brickPadding = ratio / 10;
-        let brickSize = (ratio / 10) * 9;
+        let brickWidth = (ratio / 10) * 9;
         
         for (let col = 0; col < this.width; col++) {
             
             let brickColor = this.fillTheRainbow();
             
             for (let row = 0; row < this.height; row++) {
-                var brickX = (col * (brickSize + brickPadding)) + this.padding;
+                var brickX = (col * (brickWidth + brickPadding)) + this.padding;
                 var brickY = (row * (25 + brickPadding)) + this.padding;
                 
                 this.bricks[col][row] = {
                     x     : Math.ceil(brickX),
                     y     : Math.ceil(brickY),
                     color : brickColor,
-                    size  : brickSize,
+                    width : brickWidth,
                     height: 25,
                     status: 1,
                 };
@@ -44,7 +44,7 @@ export class Grid {
                     x     : 0,
                     y     : 0,
                     color : 0,
-                    size  : 0,
+                    width : 0,
                     height: 0,
                     status: 1,
                 };
@@ -59,7 +59,6 @@ export class Grid {
         var green = Math.trunc(Math.random() * (255 - 0) + 0);
         var blue  = Math.trunc(Math.random() * (255 - 0) + 0);
         
-        // return 'rgb(' + red + ', ' + green + ', ' + blue + ')';
         return `rgb(${red}, ${green}, ${blue})`;
     }
     
@@ -72,7 +71,7 @@ export class Grid {
                     ctx.fillRect(
                         this.bricks[c][r].x, 
                         this.bricks[c][r].y, 
-                        this.bricks[c][r].size, 
+                        this.bricks[c][r].width, 
                         this.bricks[c][r].height
                     );
                     ctx.closePath();

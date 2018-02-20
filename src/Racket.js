@@ -1,9 +1,9 @@
 export class Racket {
     constructor(color) {
-        this.color = color;
-        this.width = 120;
-        this.height = 12;
-        this.leftPressed = false;
+        this.color        = color;
+        this.width        = 120;
+        this.height       = 12;
+        this.leftPressed  = false;
         this.rightPressed = false;
     }
 
@@ -63,7 +63,7 @@ export class Racket {
     mouseMoveHandler(e, canvas) {
         var relativeX = e.clientX - canvas.offsetLeft;
         if (relativeX > 0 && relativeX < canvas.width) {
-            this.posX = relativeX - this.width / 2;
+            this.posX = relativeX - (this.width / 2);
         }
     }
 }
