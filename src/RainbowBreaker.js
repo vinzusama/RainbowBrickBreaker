@@ -77,14 +77,19 @@ export class RainbowBreaker {
 
         for (let col = 0; col < bricks.length; col++) {
             for (let row = 0; row < bricks[col].length; row++) {
-                let brick = bricks[col][row];
+                const brick = bricks[col][row];
                 if (brick.status === 1) {
                     // if ( ball.Y < (brick.Y + brick.height) ) {
-                    if (ball.Y > brick.y && ball.Y < brick.y + brick.height && ball.X > brick.x && ball.X < brick.x + brick.width) {
+                    if ((ball.X > brick.x && ball.X < brick.x + brick.width) && (ball.posY <= brick.y + brick.height)) {
                         ball.bounceY();
                         brick.status = 0;
                         // } else if (ball.X >) {
 
+                    } else if (ball.X < brick.x && (ball.Y > brick.y && ball.Y < brick.y + brick.height)) {
+                        ball.bounceX();
+                        brick.status = 0;
+                    // } else if (ball.posY > brick.y && ball.posY < brick) {
+                    //     ball.bounceY();
                     }
                 }
             }

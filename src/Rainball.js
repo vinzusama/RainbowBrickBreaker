@@ -3,15 +3,15 @@ export class Rainball {
         this.radius = size;
         this.color  = color;
         this.dx     = 3;
-        this.dy     = -3;
+        this.dy     = -2;
     }
 
     get X() {
-        return this.posX + this.radius;
+        return this.posX + this.radius + this.dx;
     }
 
     get Y() {
-        return this.posY + this.radius;
+        return this.posY + this.radius + this.dy;
     }
 
     init(posX, posY, ctx) {
